@@ -1,0 +1,457 @@
+openapi: 3.0.0
+info:
+  title: car-booking
+  contact: {}
+  version: '1.0'
+servers:
+  - url: http://localhost:8080/v1
+    variables: {}
+paths:
+  /customers:
+    get:
+      tags:
+        - Misc
+      summary: http://localhost:8080/v1/customers
+      operationId: http://localhost:8080/v1/customers
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customers~1get-response'
+      deprecated: false
+    post:
+      tags:
+        - Misc
+      summary: http://localhost:8080/v1/customers
+      operationId: Posthttp://localhost:8080/v1/customers
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customer~1get-request'
+            example:
+              user:
+                name: 123
+                email: c@car
+                password: 1234
+              balance: 10
+        required: true
+        x-send-file-in-body: false
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /customers/{id}:
+    get:
+      tags:
+        - Misc
+      summary: http://localhost:8080/v1/customers/{id}
+      operationId: http://localhost:8080/v1/customers/{id}
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer~1get-response'
+              example:
+                user:
+                  name: 123
+                  email: a@car
+                  password: 1234
+                balance: 10
+                id: f662a1bf-50ca-30f8-baa1-165eb6716c98
+      deprecated: false
+  /rentals/{carLicenseNo}:
+    get:
+      tags:
+        - Misc
+      summary: http://localhost:8080/v1/rentals/{carLicenseNo}
+      operationId: http://localhost:8080/v1/rentals/{carLicenseNo}
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rentals~1post-response'
+              example:
+                customerId: f662a1bf-50ca-30f8-baa1-165eb6716c98
+                carInventory:
+                  licenseNo: A1
+                  location:
+                    lat: 0
+                    lng: 0
+                  rentPerMinute: 10
+                rentTime: 2020-03-12T12:06:59.979053Z
+      deprecated: false
+    delete:
+      tags:
+        - Misc
+      summary: http://localhost:8080/v1/rentals/{carLicenseNo}
+      operationId: Deletehttp://localhost:8080/v1/rentals/{carLicenseNo}
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rentals~1get-request'
+            example:
+              customerId: f662a1bf-50ca-30f8-baa1-165eb6716c98
+              requestTime: 2020-03-12T20:31:27.420211Z
+              carLicenseNo: A1
+        required: true
+        x-send-file-in-body: false
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rentals~1delete-response'
+              example:
+                carRental:
+                  customerId: f662a1bf-50ca-30f8-baa1-165eb6716c98
+                  carInventory:
+                    licenseNo: A1
+                    location:
+                      lat: 0
+                      lng: 0
+                    rentPerMinute: 10
+                  rentTime: 2020-03-12T12:56:06.538834Z
+                rent: 4550
+                rentStopTime: 2020-03-12T20:31:27.420211Z
+      deprecated: false
+  /rentals/nearbyCars:
+    post:
+      tags:
+        - Misc
+      summary: http://localhost:8080/v1/rentals/nearbyCars
+      operationId: http://localhost:8080/v1/rentals/nearbyCars
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rentals~1nearbyCars~1post-request'
+            example:
+              location:
+                lat: 0
+                lng: 0
+              distanceInMeter: 5000
+        required: true
+        x-send-file-in-body: false
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/nearByCars-response'
+              example:
+                - licenseNo: B2
+                  location:
+                    lat: 0
+                    lng: 9.9999999999999995E-07
+                  rentPerMinute: 1
+                - licenseNo: C3
+                  location:
+                    lat: 0
+                    lng: 3.0000000000000001E-06
+                  rentPerMinute: 10
+      deprecated: false
+  /rentals:
+    post:
+      tags:
+        - Misc
+      summary: http://localhost:8080/v1/rentals
+      operationId: http://localhost:8080/v1/rentals
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/rentals~1post-request'
+            example:
+              customerId: f662a1bf-50ca-30f8-baa1-165eb6716c98
+              requestTime: 2020-03-11T20:31:27.420211Z
+              carLicenseNo: C3
+        required: true
+        x-send-file-in-body: false
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rentals~1post-response'
+              example:
+                customerId: f662a1bf-50ca-30f8-baa1-165eb6716c98
+                carInventory:
+                  licenseNo: B2
+                  location:
+                    lat: 0
+                    lng: 9.9999999999999995E-07
+                  rentPerMinute: 1
+                rentTime: 2020-03-11T20:31:27.420211Z
+      deprecated: false
+components:
+  schemas:
+    customer/get-request:
+      title: customer/get-request
+      required:
+        - user
+        - balance
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        balance:
+          type: integer
+          format: int32
+      example:
+        user:
+          name: 123
+          email: c@car
+          password: 1234
+        balance: 10
+    User:
+      title: User
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: 123
+        email: c@car
+        password: 1234
+    rentals/nearbyCars/post-request:
+      title: rentals/nearbyCars/post-request
+      required:
+        - location
+        - distanceInMeter
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        distanceInMeter:
+          type: integer
+          format: int32
+      example:
+        location:
+          lat: 0
+          lng: 0
+        distanceInMeter: 5000
+    Location:
+      title: Location
+      required:
+        - lat
+        - lng
+      type: object
+      properties:
+        lat:
+          type: integer
+          format: int32
+        lng:
+          type: integer
+          format: int32
+      example:
+        lat: 0
+        lng: 0
+    rentals/post-request:
+      title: rentals/post-request
+      required:
+        - customerId
+        - requestTime
+        - carLicenseNo
+      type: object
+      properties:
+        customerId:
+          type: string
+        requestTime:
+          type: string
+        carLicenseNo:
+          type: string
+      example:
+        customerId: f662a1bf-50ca-30f8-baa1-165eb6716c98
+        requestTime: 2020-03-11T20:31:27.420211Z
+        carLicenseNo: C3
+    rentals/get-request:
+      title: rentals/get-request
+      required:
+        - customerId
+        - requestTime
+        - carLicenseNo
+      type: object
+      properties:
+        customerId:
+          type: string
+        requestTime:
+          type: string
+        carLicenseNo:
+          type: string
+      example:
+        customerId: f662a1bf-50ca-30f8-baa1-165eb6716c98
+        requestTime: 2020-03-12T20:31:27.420211Z
+        carLicenseNo: A1
+    rentals/post-response:
+      title: rentals/post-response
+      required:
+        - customerId
+        - carInventory
+        - rentTime
+      type: object
+      properties:
+        customerId:
+          type: string
+          example: f662a1bf-50ca-30f8-baa1-165eb6716c98
+        carInventory:
+          $ref: '#/components/schemas/CarInventory'
+        rentTime:
+          type: string
+          example: 03/11/2020 20:31:27
+    CarInventory:
+      title: CarInventory
+      required:
+        - licenseNo
+        - location
+        - rentPerMinute
+      type: object
+      properties:
+        licenseNo:
+          type: string
+          example: B2
+        location:
+          $ref: '#/components/schemas/Location1'
+        rentPerMinute:
+          type: integer
+          format: int32
+          example: 1
+    Location1:
+      title: Location1
+      required:
+        - lat
+        - lng
+      type: object
+      properties:
+        lat:
+          type: number
+          example: 0
+        lng:
+          type: number
+          example: 9.9999999999999995E-07
+    customer/get-response:
+      title: customer/get-response
+      required:
+        - user
+        - balance
+        - id
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        balance:
+          type: integer
+          format: int32
+          example: 10
+        id:
+          type: string
+          example: f662a1bf-50ca-30f8-baa1-165eb6716c98
+    nearByCars-response:
+      title: nearByCars-response
+      required:
+        - licenseNo
+        - location
+        - rentPerMinute
+      type: object
+      properties:
+        licenseNo:
+          type: string
+          example: B2
+        location:
+          $ref: '#/components/schemas/Location1'
+        rentPerMinute:
+          type: integer
+          format: int32
+          example: 1
+    rentals/delete-response:
+      title: rentals/delete-response
+      required:
+        - carRental
+        - rent
+        - rentStopTime
+      type: object
+      properties:
+        carRental:
+          $ref: '#/components/schemas/CarRental'
+        rent:
+          type: integer
+          format: int32
+          example: 4550
+        rentStopTime:
+          type: string
+          example: 03/12/2020 20:31:27
+    CarRental:
+      title: CarRental
+      required:
+        - customerId
+        - carInventory
+        - rentTime
+      type: object
+      properties:
+        customerId:
+          type: string
+          example: f662a1bf-50ca-30f8-baa1-165eb6716c98
+        carInventory:
+          $ref: '#/components/schemas/CarInventory'
+        rentTime:
+          type: string
+          example: 2020-03-12T12:56:06.538834Z
+    customers/get-response:
+      title: customers/get-response
+      required:
+        - user
+        - balance
+        - id
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        balance:
+          type: integer
+          format: int32
+          example: -4540
+        id:
+          type: string
+          example: f662a1bf-50ca-30f8-baa1-165eb6716c98
+tags:
+  - name: Misc
+    description: ''
